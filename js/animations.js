@@ -174,140 +174,44 @@ class AnimationController {
     }
     
     setupLoadingAnimations() {
-        // Staggered loading animations for video grid
-        const loadVideoGrid = (container, videos) => {
-            if (!container || !videos.length) return;
-            
-            // Clear existing content
-            container.innerHTML = '';
-            
-            // Create and append cards with staggered animation
-            videos.forEach((video, index) => {
-                const card = createEnhancedVideoCard(video, index, container.classList.contains('mobile-feed'));
-                
-                // Initial state
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px) scale(0.9)';
-                
-                container.appendChild(card);
-                
-                // Animate in with delay
-                setTimeout(() => {
-                    card.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0) scale(1)';
-                }, index * 100);
-            });
-        };
-        
-        // Override global function
-        window.loadVideoGrid = () => {
-            const videoGrid = document.getElementById('videoGrid');
-            const mobileFeed = document.getElementById('mobileFeed');
-            const isMobile = window.innerWidth <= 768;
-            
-            if (isMobile && mobileFeed) {
-                loadVideoGrid(mobileFeed, window.filteredVideos || window.videoData || []);
-            } else if (videoGrid) {
-                loadVideoGrid(videoGrid, window.filteredVideos || window.videoData || []);
-            }
-        };
+        // Loading screen animation is handled in CSS
     }
     
     setupCounterAnimations() {
-        // Animated counters for metrics
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    this.animateCounter(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
+        const counters = document.querySelectorAll('.metric-value');
         
-        document.querySelectorAll('.metric-value').forEach(counter => {
-            counterObserver.observe(counter);
+        counters.forEach(counter => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.animateCounter(counter);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            observer.observe(counter);
         });
-        
-        this.observers.push(counterObserver);
     }
     
     animateElement(element) {
-        if (this.isReduced) {
-            element.classList.add('visible');
-            return;
-        }
-        
         element.classList.add('visible');
-        
-        // Special animations for specific elements
-        if (element.classList.contains('skill-item')) {
-            this.animateSkillBar(element);
-        }
-        
-        if (element.classList.contains('hero-text')) {
-            this.animateHeroText(element);
-        }
     }
     
     resetElement(element) {
-        if (this.isReduced) return;
-        
         element.classList.remove('visible');
-        
-        // Reset skill bars
-        if (element.classList.contains('skill-item')) {
-            const progressBar = element.querySelector('.skill-progress');
-            if (progressBar) {
-                progressBar.style.width = '0%';
-            }
-        }
-    }
-    
-    animateSkillBar(skillItem) {
-        const progressBar = skillItem.querySelector('.skill-progress');
-        if (!progressBar) return;
-        
-        const targetWidth = progressBar.style.width || '0%';
-        progressBar.style.width = '0%';
-        
-        setTimeout(() => {
-            progressBar.style.transition = 'width 2s cubic-bezier(0.22, 1, 0.36, 1)';
-            progressBar.style.width = targetWidth;
-        }, 200);
-    }
-    
-    animateHeroText(heroText) {
-        const children = heroText.children;
-        
-        Array.from(children).forEach((child, index) => {
-            child.style.opacity = '0';
-            child.style.transform = 'translateY(30px)';
-            
-            setTimeout(() => {
-                child.style.transition = 'all 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
-                child.style.opacity = '1';
-                child.style.transform = 'translateY(0)';
-            }, index * 200);
-        });
     }
     
     animateCounter(counter) {
         const text = counter.textContent;
-        const hasNumber = /\d/.test(text);
-        
-        if (!hasNumber) return;
-        
-        const number = parseFloat(text.replace(/[^\d.]/g, ''));
-        const suffix = text.replace(/[\d.]/g, '');
-        
-        if (isNaN(number)) return;
-        
+        const value = parseFloat(text);
+        const suffix = text.replace(/[0-9.]/g, '');
         let current = 0;
-        const increment = number / 60; // 60 frames for 1 second at 60fps
+        const duration = 2000;
+        const step = value / (duration / 16); // 60fps
         
         const animate = () => {
-            current += increment;
-            if (current < number) {
+            current += step;
+            if (current < value) {
                 counter.textContent = Math.floor(current) + suffix;
                 requestAnimationFrame(animate);
             } else {
