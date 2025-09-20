@@ -113,6 +113,39 @@
     box-shadow: var(--shadow-lg);
 }
 
+/* Video Navigation Buttons (for fullscreen) */
+.video-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s var(--easing-smooth);
+    z-index: 10;
+    display: none; /* Hidden by default */
+}
+
+.video-nav:hover {
+    background: var(--accent-color);
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* Show nav in fullscreen */
+.video-wrapper.fullscreen .video-nav {
+    display: block;
+}
+
 /* Custom Video Controls (if needed for custom player) */
 .custom-controls {
     position: absolute;
