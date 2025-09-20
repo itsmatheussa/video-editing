@@ -43,6 +43,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.02em;
+    color: #fff; /* Make all h tags white by default */
 }
 
 .section-title {
@@ -53,6 +54,7 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    color: #fff; /* Fallback to white */
 }
 
 /* Container */
@@ -181,7 +183,7 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    color: var(--accent-color); /* Fallback for browsers without gradient support */
+    color: #fff; /* Fallback to white for visibility */
 }
 
 .hero-subtitle {
