@@ -174,15 +174,16 @@ class DeviceController {
         // Add opening class
         device.classList.add('mobile-opening');
         
-        // Phone slide and expand animation
-        const phoneFrame = device.querySelector('.phone-frame');
-        if (phoneFrame) {
-            phoneFrame.style.transition = 'all 1.5s cubic-bezier(0.22, 1, 0.36, 1)';
-            phoneFrame.style.transform = 'translateY(0) scale(1)';
-            phoneFrame.style.opacity = '1';
-        }
+        // Phone slide in animation
+        setTimeout(() => {
+            const phoneFrame = device.querySelector('.phone-frame');
+            if (phoneFrame) {
+                phoneFrame.style.transform = 'translateY(0) scale(1)';
+                phoneFrame.style.opacity = '1';
+            }
+        }, 100);
         
-        // Screen activation
+        // Screen boot sequence
         setTimeout(() => {
             this.bootScreen();
         }, 600);
