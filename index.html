@@ -1,289 +1,604 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Portfolio - Streaming Experience</title>
-    <!-- SEO and Meta Tags -->
-    <meta name="description" content="Portfolio of Matheus Sá, director and editor specializing in audiovisual production.">
-    <meta property="og:title" content="Matheus Sá Portfolio">
-    <meta property="og:description" content="Transforming ideas into impactful visual narratives.">
-    <meta property="og:image" content="path/to/og-image.jpg">
-    <meta property="og:url" content="your-site-url.com">
-    <meta name="twitter:card" content="summary_large_image">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/device.css">
-    <link rel="stylesheet" href="css/player.css">
-    <link rel="stylesheet" href="css/responsive.css">
-</head>
-<body>
-    <div id="loading-screen" class="loading-screen">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <p class="loading-text">Preparing your experience...</p>
-        </div>
-    </div>
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <section id="hero" class="hero">
-        <div class="hero-background">
-            <div class="gradient-overlay"></div>
-            <div class="particles"></div>
-        </div>
-        <div class="hero-content container">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    Videos that Capture Attention
-                    and Generate Impact.
-                </h1>
-                <p class="hero-subtitle">
-                    I am Matheus Sá — director and editor.
-                    Transforming briefs into visual narratives that convert.
-                </p>
-                <div class="hero-cta">
-                    <a href="#cases" class="btn-primary">View Portfolio</a>
-                    <a href="#contact" class="btn-secondary">Schedule Call</a>
-                </div>
-            </div>
+:root {
+    --primary-bg: #0B0D10;
+    --secondary-bg: #1A1D23;
+    --accent-color: #00C2FF;
+    --accent-secondary: #FF6A00;
+    --text-primary: #F6F6F7;
+    --text-secondary: #A8B2C1;
+    --text-muted: #6B7280;
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+    --shadow-xl: 0 35px 60px -12px rgba(0, 0, 0, 0.9);
+    --gradient-primary: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-secondary) 100%);
+    --gradient-dark: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+    --easing-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
+    --easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-            <div id="deviceContainer" class="device-container">
-                <div id="desktopDevice" class="device desktop-device">
-                    <div class="laptop-base">
-                        <div class="laptop-screen-frame">
-                            <div class="laptop-screen">
-                                <div id="screenContent" class="screen-content">
-                                    <div class="platform-header">
-                                        <h2>CreativeStream</h2>
-                                        <nav class="platform-nav">
-                                            <button class="nav-btn active" data-filter="all">All</button>
-                                            <button class="nav-btn" data-filter="case-studies">Cases</button>
-                                            <button class="nav-btn" data-filter="ads">Ads</button>
-                                            <button class="nav-btn" data-filter="shorts">Shorts</button>
-                                        </nav>
-                                    </div>
-                                    <div class="video-grid"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="laptop-keyboard"></div>
-                    </div>
-                </div>
+html {
+    scroll-behavior: smooth;
+}
 
-                <div id="mobileDevice" class="device mobile-device">
-                    <div class="phone-frame">
-                        <div class="phone-screen">
-                            <div id="screenContentMobile" class="screen-content">
-                                <div class="platform-header">
-                                    <h2>CreativeStream</h2>
-                                    <nav class="platform-nav">
-                                        <button class="nav-btn active" data-filter="all">All</button>
-                                        <button class="nav-btn" data-filter="case-studies">Cases</button>
-                                        <button class="nav-btn" data-filter="ads">Ads</button>
-                                        <button class="nav-btn" data-filter="shorts">Shorts</button>
-                                    </nav>
-                                </div>
-                                <div class="mobile-feed"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--primary-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+}
 
-                <div id="deviceHint" class="device-hint">
-                    <div class="hint-content">
-                        <i class="fas fa-mouse-pointer"></i>
-                        <p>Click to open</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #fff; /* Make all h tags white by default */
+}
 
-    <section id="cases" class="cases-section">
-        <div class="container">
-            <h2 class="section-title">Featured Cases</h2>
-            <div class="case-card">
-                <div class="case-image">
-                    <div class="image-frame">
-                        <span class="profile-placeholder">📽️</span>
-                    </div>
-                </div>
-                <div class="case-content">
-                    <h3>Premium Digital Campaign</h3>
-                    <div class="case-metrics">
-                        <div class="metric">
-                            <span class="metric-value">2.5M</span>
-                            <span class="metric-label">Views</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-value">85%</span>
-                            <span class="metric-label">Engagement</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-value">300%</span>
-                            <span class="metric-label">ROI</span>
-                        </div>
-                    </div>
-                    <p>We transformed a complex idea into a visual narrative that generated measurable impact for the brand.</p>
-                    <a href="#hero" class="btn-case" onclick="openDeviceAndScroll()">View Full Case</a>
-                </div>
-            </div>
-        </div>
-    </section>
+.section-title {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    margin-bottom: 3rem;
+    text-align: center;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #fff; /* Fallback to white */
+}
 
-    <section id="services" class="services-section">
-        <div class="container">
-            <h2 class="section-title">Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-video"></i></div>
-                    <h3>Audiovisual Production</h3>
-                    <p>From concept to final delivery. Institutional videos, campaigns, and premium content.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-edit"></i></div>
-                    <h3>Editing & Motion</h3>
-                    <p>Cinematic post-production with motion graphics and professional visual effects.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
-                    <h3>Creative Direction</h3>
-                    <p>Development of visual and narrative concept aligned with brand objectives.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+/* Container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
 
-    <section id="about" class="about-section">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2 class="section-title">About</h2>
-                    <p>I am Matheus Sá, producer & editor with over 8 years transforming ideas into impactful visual narratives. I work with storytelling, performance, and branding through video — from concept to delivery.</p>
-                    <div class="skills">
-                        <div class="skill-item">
-                            <span class="skill-name">Direction</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Editing</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Motion Design</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <div class="image-frame">
-                        <span class="profile-placeholder">MS</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+/* Loading Screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: opacity 0.8s var(--easing-cinematic);
+}
 
-    <section id="testimonials" class="testimonials-section">
-        <div class="container">
-            <h2 class="section-title">Testimonials</h2>
-            <div class="testimonials-slider">
-                <div class="testimonial active">
-                    <blockquote>"Matheus turned our vision into reality. The result exceeded all expectations."</blockquote>
-                    <cite>
-                        <strong>Rodrigo Silva</strong>
-                        <span>CEO, Fox Sales</span>
-                    </cite>
-                </div>
-                <div class="testimonial">
-                    <blockquote>"Exceptional editing skills and creative direction. Highly recommend!"</blockquote>
-                    <cite>
-                        <strong>Pedro Miguel</strong>
-                        <span>Copywriter</span>
-                    </cite>
-                </div>
-            </div>
-        </div>
-    </section>
+.loading-content {
+    text-align: center;
+}
 
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h2>Let's Create Something Amazing Together?</h2>
-                    <p>Ready to transform your idea into a visual narrative that converts?</p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>contact@matheussa.com</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>+55 (11) 99999-9999</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>São Paulo, Brazil</span>
-                        </div>
-                    </div>
-                </div>
-                <form class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" placeholder="Enter your full name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="Enter a valid email address" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Company</label>
-                        <input type="text" id="company" placeholder="Your company name (optional)">
-                    </div>
-                    <div class="form-group">
-                        <label for="project">Project</label>
-                        <textarea id="project" placeholder="Describe your project details" required></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 3px solid var(--border-subtle);
+    border-top: 3px solid var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
 
-    <!-- Video Player Overlay (Added next/prev buttons for fullscreen navigation) -->
-    <div id="videoPlayerOverlay" class="video-player-overlay">
-        <div class="player-container">
-            <button id="closePlayer" class="close-player"><i class="fas fa-times"></i></button>
-            <div class="video-wrapper">
-                <iframe id="videoFrame" src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                <button id="prevVideo" class="video-nav prev" style="display: none;"><i class="fas fa-arrow-left"></i></button>
-                <button id="nextVideo" class="video-nav next" style="display: none;"><i class="fas fa-arrow-right"></i></button>
-            </div>
-            <div class="video-info">
-                <h3 id="videoTitle"></h3>
-                <p id="videoDescription"></p>
-                <div class="video-actions">
-                    <button id="videoCTA" class="btn-cta">View More</button>
-                </div>
-            </div>
-        </div>
-    </div>
+.loading-text {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 400;
+}
 
-    <!-- JavaScript Files -->
-    <script src="js/device.js"></script>
-    <script src="js/animations.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/main.js"></script>
-</body>
-</html>
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(0, 194, 255, 0.15) 0%, transparent 50%),
+                linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+}
+
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+}
+
+.particles::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(0, 194, 255, 0.4), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(255, 106, 0, 0.3), transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.2), transparent);
+    background-repeat: repeat;
+    background-size: 150px 100px;
+    animation: particleMove 20s linear infinite;
+}
+
+@keyframes particleMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-150px, -100px); }
+}
+
+.hero-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.hero-text {
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 5vw, 5rem);
+    margin-bottom: 2rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #fff; /* Fallback to white for visibility */
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    max-width: 600px;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.4s var(--easing-cinematic);
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+.btn-case {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s var(--easing-smooth);
+}
+
+.btn-case:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Cases Section */
+.cases-section {
+    padding: 8rem 0;
+}
+
+.case-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-lg);
+}
+
+.case-image {
+    display: flex;
+    justify-content: center;
+}
+
+.image-frame {
+    width: 400px;
+    height: 500px;
+    border-radius: 24px;
+    background: var(--glass-bg);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(20px);
+}
+
+.profile-placeholder {
+    font-size: 4rem;
+    color: var(--text-muted);
+}
+
+.case-content h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.case-metrics {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.metric {
+    text-align: center;
+}
+
+.metric-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.case-content p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* Services Section */
+.services-section {
+    padding: 8rem 0;
+    background: var(--secondary-bg);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.service-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+    backdrop-filter: blur(20px);
+    transition: all 0.4s var(--easing-cinematic);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-xl);
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    font-size: 2rem;
+    color: white;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.service-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* About Section */
+.about-section {
+    padding: 8rem 0;
+    background: var(--secondary-bg);
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-text .section-title {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.about-text p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    line-height: 1.7;
+}
+
+.skills {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.skill-name {
+    min-width: 120px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.skill-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--border-subtle);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: 4px;
+    transition: width 2s var(--easing-cinematic);
+}
+
+.about-image {
+    display: flex;
+    justify-content: center;
+}
+
+.image-frame {
+    width: 400px;
+    height: 500px;
+    border-radius: 24px;
+    background: var(--glass-bg);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(20px);
+}
+
+.profile-placeholder {
+    font-size: 4rem;
+    color: var(--text-muted);
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 8rem 0;
+}
+
+.testimonials-slider {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.testimonial {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s var(--easing-cinematic);
+    display: none; /* Hide by default for cycling */
+}
+
+.testimonial.active {
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+}
+
+.testimonial blockquote {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.testimonial cite {
+    display: block;
+}
+
+.testimonial cite strong {
+    display: block;
+    font-size: 1.1rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.testimonial cite span {
+    color: var(--text-muted);
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 8rem 0;
+    background: var(--secondary-bg);
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.contact-info h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-info p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-secondary);
+}
+
+.contact-item i {
+    color: var(--accent-color);
+    width: 20px;
+}
+
+.contact-form {
+    background: var(--glass-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 3rem;
+    backdrop-filter: blur(20px);
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s var(--easing-smooth);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    background: rgba(0, 194, 255, 0.05);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Smooth scrolling behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Animation classes for intersection observer */
+.animate-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s var(--easing-cinematic);
+}
+
+.animate-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
