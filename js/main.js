@@ -59,7 +59,19 @@ window.videoData = [
 // Initialize the site
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
+    cycleTestimonials(); // Start cycling testimonials
 });
+
+function cycleTestimonials() {
+    const testimonials = document.querySelectorAll('.testimonial');
+    let current = 0;
+    
+    setInterval(() => {
+        testimonials.forEach(t => t.classList.remove('active'));
+        testimonials[current].classList.add('active');
+        current = (current + 1) % testimonials.length;
+    }, 5000); // Cycle every 5 seconds
+}
 
 function initializeApp() {
     // Check if mobile
@@ -410,4 +422,5 @@ if ('performance' in window) {
 
 // Global functions for HTML onclick events
 window.openDevice = openDevice;
+window.openDeviceAndScroll = openDeviceAndScroll;
 window.scrollToContact = scrollToContact;
