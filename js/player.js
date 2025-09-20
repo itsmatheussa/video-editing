@@ -6,6 +6,7 @@ class VideoPlayerController {
         this.currentVideo = null;
         this.playerElement = null;
         this.overlayElement = null;
+        this.currentIndex = 0;
         
         this.init();
     }
@@ -23,6 +24,8 @@ class VideoPlayerController {
         this.titleElement = document.getElementById('videoTitle');
         this.descriptionElement = document.getElementById('videoDescription');
         this.ctaButton = document.getElementById('videoCTA');
+        this.prevButton = document.getElementById('prevVideo');
+        this.nextButton = document.getElementById('nextVideo');
     }
     
     setupEventListeners() {
@@ -53,10 +56,45 @@ class VideoPlayerController {
                 e.preventDefault();
                 const videoData = this.getVideoDataFromElement(e.target);
                 if (videoData) {
+                    this.currentIndex = filteredVideos.findIndex(v => v.id === videoData.id);
                     this.open(videoData);
                 }
             }
         });
+        
+        // Fullscreen change listener
+        document.addEventListener('fullscreenchange', () => this.handleFullscreenChange());
+        
+        // Next/Prev buttons
+        if (this.prevButton) {
+            this.prevButton.addEventListener('click', () => this.changeVideo(-1));
+        }
+        if (this.nextButton) {
+            this.nextButton.addEventListener('click', () => this.changeVideo(1));
+        }
+    }
+    
+    handleFullscreenChange() {
+        if (document.fullscreenElement === this.playerElement) {
+            // In fullscreen, show nav buttons
+            if (this.prevButton) this.prevButton.style.display = 'block';
+            if (this.nextButton) this.nextButton.style.display = 'block';
+            this.overlayElement.classList.add('fullscreen');
+        } else {
+            // Out of fullscreen, hide nav buttons
+            if (this.prevButton) this.prevButton.style.display = 'none';
+            if (this.nextButton) this.nextButton.style.display = 'none';
+            this.overlayElement.classList.remove('fullscreen');
+        }
+    }
+    
+    changeVideo(direction) {
+        this.currentIndex += direction;
+        if (this.currentIndex < 0) this.currentIndex = filteredVideos.length - 1;
+        if (this.currentIndex >= filteredVideos.length) this.currentIndex = 0;
+        
+        const nextVideo = filteredVideos[this.currentIndex];
+        this.open(nextVideo);
     }
     
     setupKeyboardControls() {
