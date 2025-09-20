@@ -204,64 +204,36 @@ class VideoPlayerController {
     
     getCTAText(category) {
         const ctaTexts = {
-            'case-studies': 'Ver Case Completo',
-            'ads': 'Solicitar Orçamento',
-            'shorts': 'Mais Projetos',
-            'default': 'Ver Projeto'
+            'case-studies': 'View Full Case',
+            'ads': 'Request Ad',
+            'shorts': 'Watch More Shorts'
         };
-        
-        return ctaTexts[category] || ctaTexts.default;
-    }
-    
-    getVideoDataFromElement(element) {
-        const videoCard = element.closest('.video-card') || element.closest('.mobile-video-card');
-        if (!videoCard) return null;
-        
-        // Find video data from the global videos array
-        const titleElement = videoCard.querySelector('.video-title');
-        if (!titleElement) return null;
-        
-        const title = titleElement.textContent;
-        return window.videoData?.find(video => video.title === title) || null;
+        return ctaTexts[category] || 'Learn More';
     }
     
     showLoadingState() {
-        if (!this.overlayElement) return;
-        
-        // Create loading indicator if it doesn't exist
-        let loadingIndicator = this.overlayElement.querySelector('.video-loading');
-        
-        if (!loadingIndicator) {
-            loadingIndicator = document.createElement('div');
-            loadingIndicator.className = 'video-loading';
-            loadingIndicator.innerHTML = `
-                <div class="video-loading-spinner"></div>
-                <div class="video-loading-text">Carregando vídeo...</div>
-            `;
-            
-            const playerContainer = this.overlayElement.querySelector('.player-container');
-            if (playerContainer) {
-                playerContainer.appendChild(loadingIndicator);
-            }
-        }
-        
-        loadingIndicator.style.display = 'flex';
+        // Implement loading spinner if needed
     }
     
     hideLoadingState() {
-        const loadingIndicator = this.overlayElement?.querySelector('.video-loading');
-        if (loadingIndicator) {
-            loadingIndicator.style.display = 'none';
+        // Remove loading spinner
+    }
+    
+    getVideoDataFromElement(element) {
+        const card = element.closest('.video-card, .mobile-video-card');
+        if (card && card.dataset.videoData) {
+            return JSON.parse(card.dataset.videoData);
         }
+        return null;
     }
     
     handleCTAClick() {
         if (!this.currentVideo) return;
         
-        // Track CTA click
+        // Track click
         this.trackCTAClick(this.currentVideo);
         
-        // Handle different CTA actions based on video category
+        // Handle based on category
         switch(this.currentVideo.category) {
             case 'case-studies':
                 this.openCaseStudy(this.currentVideo);
@@ -458,11 +430,11 @@ function createEnhancedVideoCard(video, index, isMobile = false) {
 // Utility function for category labels
 function getCategoryLabel(category) {
     const labels = {
-        'all': 'Todos',
+        'all': 'All',
         'case-studies': 'Case',
-        'ads': 'Publicidade', 
+        'ads': 'Ad',
         'shorts': 'Short',
-        'music': 'Música',
+        'music': 'Music',
         'reels': 'Reel'
     };
     return labels[category] || category;
