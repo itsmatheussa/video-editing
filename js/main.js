@@ -7,61 +7,52 @@ let videos = [];
 let filteredVideos = [];
 let isMobile = window.innerWidth <= 768;
 
-// Sample video data (replace with your actual YouTube video data)
+// Sample video data (updated with new YouTube IDs)
 window.videoData = [
     {
-        id: 'dQw4w9WgXcQ',
-        title: 'Campanha Premium Brand',
-        description: 'Uma narrativa visual que transformou a percepção da marca no mercado premium.',
+        id: '32V0GzI7I2o',
+        title: 'Premium Brand Campaign',
+        description: 'A visual narrative that transformed brand perception in the premium market.',
         category: 'case-studies',
-        thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
+        thumbnail: 'https://img.youtube.com/vi/32V0GzI7I2o/maxresdefault.jpg',
         duration: '2:30',
         featured: true
     },
     {
-        id: 'oHg5SJYRHA0',
+        id: '9zOpEKGi1fA',
         title: 'Motion Graphics Reel',
-        description: 'Compilado dos melhores trabalhos em motion design e animação.',
+        description: 'Compilation of the best works in motion design and animation.',
         category: 'shorts',
-        thumbnail: 'https://img.youtube.com/vi/oHg5SJYRHA0/maxresdefault.jpg',
+        thumbnail: 'https://img.youtube.com/vi/9zOpEKGi1fA/maxresdefault.jpg',
         duration: '1:45',
         featured: true
     },
     {
-        id: 'ScMzIvxBSi4',
-        title: 'Comercial TV - Produto',
-        description: 'Direção e edição de comercial para televisão com foco em conversão.',
+        id: '8Jd-bwOBiXo',
+        title: 'TV Commercial - Product',
+        description: 'Direction and editing of TV commercial focused on conversion.',
         category: 'ads',
-        thumbnail: 'https://img.youtube.com/vi/ScMzIvxBSi4/maxresdefault.jpg',
+        thumbnail: 'https://img.youtube.com/vi/8Jd-bwOBiXo/maxresdefault.jpg',
         duration: '0:30',
         featured: false
     },
     {
-        id: 'astISOttCQ0',
-        title: 'Documentary Short',
-        description: 'Mini documentário sobre inovação e criatividade no mercado digital.',
+        id: '_knXPHAiMuE',
+        title: 'Short Documentary',
+        description: 'Mini documentary on innovation and creativity in the digital market.',
         category: 'case-studies',
-        thumbnail: 'https://img.youtube.com/vi/astISOttCQ0/maxresdefault.jpg',
+        thumbnail: 'https://img.youtube.com/vi/_knXPHAiMuE/maxresdefault.jpg',
         duration: '5:20',
         featured: true
     },
     {
-        id: '3JZ_D3ELwOQ',
+        id: 'oAGIIzr0A3g',
         title: 'Social Media Content',
-        description: 'Conteúdo dinâmico criado para redes sociais com alta performance.',
+        description: 'Dynamic content created for social media with high performance.',
         category: 'shorts',
-        thumbnail: 'https://img.youtube.com/vi/3JZ_D3ELwOQ/maxresdefault.jpg',
+        thumbnail: 'https://img.youtube.com/vi/oAGIIzr0A3g/maxresdefault.jpg',
         duration: '0:15',
         featured: false
-    },
-    {
-        id: 'kJQP7kiw5Fk',
-        title: 'Brand Storytelling',
-        description: 'Narrativa emocional que conecta marca e consumidor através do vídeo.',
-        category: 'ads',
-        thumbnail: 'https://img.youtube.com/vi/kJQP7kiw5Fk/maxresdefault.jpg',
-        duration: '3:15',
-        featured: true
     }
 ];
 
@@ -102,11 +93,11 @@ function checkMobileDevice() {
     const mobileDevice = document.getElementById('mobileDevice');
     
     if (isMobile) {
-        desktopDevice.style.display = 'none';
-        mobileDevice.style.display = 'block';
+        if (desktopDevice) desktopDevice.style.display = 'none';
+        if (mobileDevice) mobileDevice.style.display = 'block';
     } else {
-        desktopDevice.style.display = 'block';
-        mobileDevice.style.display = 'none';
+        if (desktopDevice) desktopDevice.style.display = 'block';
+        if (mobileDevice) mobileDevice.style.display = 'none';
     }
 }
 
@@ -116,7 +107,9 @@ function setupEventListeners() {
     
     // Device interaction
     const deviceContainer = document.getElementById('deviceContainer');
-    deviceContainer.addEventListener('click', handleDeviceClick);
+    if (deviceContainer) {
+        deviceContainer.addEventListener('click', handleDeviceClick);
+    }
     
     // Video filter buttons
     const filterButtons = document.querySelectorAll('.nav-btn');
@@ -170,8 +163,10 @@ function openDevice() {
     }
     
     // Hide hint
-    deviceHint.style.opacity = '0';
-    deviceHint.style.transform = 'translateX(-50%) translateY(20px)';
+    if (deviceHint) {
+        deviceHint.style.opacity = '0';
+        deviceHint.style.transform = 'translateX(-50%) translateY(20px)';
+    }
     
     // Load video content after animation
     setTimeout(() => {
@@ -179,7 +174,7 @@ function openDevice() {
     }, 1000);
     
     // Show screen content
-    const screenContent = document.getElementById('screenContent');
+    const screenContent = document.getElementById(isMobile ? 'screenContentMobile' : 'screenContent');
     if (screenContent) {
         setTimeout(() => {
             screenContent.style.opacity = '1';
@@ -188,156 +183,48 @@ function openDevice() {
 }
 
 function loadVideoGrid() {
-    const videoGrid = document.getElementById('videoGrid');
-    const mobileFeed = document.getElementById('mobileFeed');
+    const container = document.querySelector(isMobile ? '.mobile-feed' : '.video-grid');
+    if (!container) return;
     
-    if (isMobile && mobileFeed) {
-        loadMobileVideoFeed();
-    } else if (videoGrid) {
-        loadDesktopVideoGrid();
-    }
-}
-
-function loadDesktopVideoGrid() {
-    const videoGrid = document.getElementById('videoGrid');
-    if (!videoGrid) return;
-    
-    videoGrid.innerHTML = '';
+    container.innerHTML = '';
     
     filteredVideos.forEach((video, index) => {
-        const videoCard = createVideoCard(video, index);
-        videoGrid.appendChild(videoCard);
+        const card = createEnhancedVideoCard(video, index, isMobile);
+        container.appendChild(card);
     });
 }
 
-function loadMobileVideoFeed() {
-    const mobileFeed = document.getElementById('mobileFeed');
-    if (!mobileFeed) return;
+function handleFilterChange(e) {
+    const button = e.target;
+    const filter = button.dataset.filter;
     
-    mobileFeed.innerHTML = '';
-    
-    filteredVideos.forEach((video, index) => {
-        const mobileCard = createMobileVideoCard(video, index);
-        mobileFeed.appendChild(mobileCard);
-    });
-}
-
-function createVideoCard(video, index) {
-    const card = document.createElement('div');
-    card.className = 'video-card';
-    card.style.animationDelay = `${index * 0.1}s`;
-    
-    card.innerHTML = `
-        <div class="video-thumbnail-container">
-            <img src="${video.thumbnail}" alt="${video.title}" class="video-thumbnail">
-        </div>
-        <div class="video-overlay">
-            <div class="play-icon">
-                <i class="fas fa-play"></i>
-            </div>
-        </div>
-        <div class="video-info">
-            <h4 class="video-title">${video.title}</h4>
-            <div class="video-meta">
-                <span class="video-duration">${video.duration}</span>
-                <span class="video-tag">${getCategoryLabel(video.category)}</span>
-            </div>
-        </div>
-    `;
-    
-    card.addEventListener('click', () => openVideoPlayer(video));
-    
-    return card;
-}
-
-function createMobileVideoCard(video, index) {
-    const card = document.createElement('div');
-    card.className = 'mobile-video-card';
-    card.style.animationDelay = `${index * 0.1}s`;
-    
-    card.innerHTML = `
-        <img src="${video.thumbnail}" alt="${video.title}" class="video-thumbnail">
-        <div class="video-overlay">
-            <div class="play-icon">
-                <i class="fas fa-play"></i>
-            </div>
-            <div class="mobile-video-info">
-                <h4 class="video-title">${video.title}</h4>
-                <div class="video-meta">
-                    <span class="video-duration">${video.duration}</span>
-                    <span class="video-tag">${getCategoryLabel(video.category)}</span>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    card.addEventListener('click', () => openVideoPlayer(video));
-    
-    return card;
-}
-
-function getCategoryLabel(category) {
-    const labels = {
-        'all': 'Todos',
-        'case-studies': 'Case',
-        'ads': 'Publicidade',
-        'shorts': 'Short',
-        'music': 'Música',
-        'reels': 'Reel'
-    };
-    return labels[category] || category;
-}
-
-function handleFilterChange(event) {
-    const filterValue = event.target.dataset.filter;
-    
-    // Update active state
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
+    // Update active button
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
     
     // Filter videos
-    if (filterValue === 'all') {
+    if (filter === 'all') {
         filteredVideos = videos;
     } else {
-        filteredVideos = videos.filter(video => video.category === filterValue);
+        filteredVideos = videos.filter(v => v.category === filter);
     }
     
-    // Update global reference
-    window.filteredVideos = filteredVideos;
-    
-    // Reload grid with animation
-    const videoGrid = document.getElementById('videoGrid');
-    const mobileFeed = document.getElementById('mobileFeed');
-    
-    if (videoGrid || mobileFeed) {
-        // Fade out
-        const container = isMobile ? mobileFeed : videoGrid;
-        if (container) {
-            container.style.opacity = '0';
-            container.style.transform = 'translateY(20px)';
-            
-            setTimeout(() => {
-                loadVideoGrid();
-                // Fade in
-                container.style.opacity = '1';
-                container.style.transform = 'translateY(0)';
-            }, 300);
-        }
-    }
+    // Reload grid
+    loadVideoGrid();
 }
 
 function openVideoPlayer(video) {
     currentVideoData = video;
+    
     const playerOverlay = document.getElementById('videoPlayerOverlay');
     const videoFrame = document.getElementById('videoFrame');
     const videoTitle = document.getElementById('videoTitle');
     const videoDescription = document.getElementById('videoDescription');
+    const videoCTA = document.getElementById('videoCTA');
     
-    if (!playerOverlay || !videoFrame) return;
+    if (!playerOverlay) return;
     
-    // Set video content
+    // Update content
     videoFrame.src = `https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1`;
     videoTitle.textContent = video.title;
     videoDescription.textContent = video.description;
@@ -464,7 +351,7 @@ function handleFormSubmit(event) {
     // Show loading state
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Enviando...';
+    submitBtn.textContent = 'Sending...';
     submitBtn.disabled = true;
     
     // Simulate form submission (replace with actual endpoint)
@@ -473,7 +360,7 @@ function handleFormSubmit(event) {
         form.reset();
         
         // Show success message
-        submitBtn.textContent = 'Mensagem Enviada!';
+        submitBtn.textContent = 'Message Sent!';
         setTimeout(() => {
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
