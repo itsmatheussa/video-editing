@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium Portfolio - Streaming Experience</title>
     <!-- SEO and Meta Tags -->
-    <meta name="description" content="Portfolio of Gabriel Silva, director and editor specializing in audiovisual production.">
-    <meta property="og:title" content="Gabriel Silva Portfolio">
+    <meta name="description" content="Portfolio of Matheus Sá, director and editor specializing in audiovisual production.">
+    <meta property="og:title" content="Matheus Sá Portfolio">
     <meta property="og:description" content="Transforming ideas into impactful visual narratives.">
     <meta property="og:image" content="path/to/og-image.jpg">
     <meta property="og:url" content="your-site-url.com">
@@ -43,7 +43,7 @@
                     and Generate Impact.
                 </h1>
                 <p class="hero-subtitle">
-                    I am Gabriel Silva — director and editor.
+                    I am Matheus Sá — director and editor.
                     Transforming briefs into visual narratives that convert.
                 </p>
                 <div class="hero-cta">
@@ -130,7 +130,7 @@
                         </div>
                     </div>
                     <p>We transformed a complex idea into a visual narrative that generated measurable impact for the brand.</p>
-                    <a href="#hero" class="btn-case" onclick="openDevice()">View Full Case</a>
+                    <a href="#hero" class="btn-case" onclick="openDeviceAndScroll()">View Full Case</a>
                 </div>
             </div>
         </div>
@@ -164,7 +164,7 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2 class="section-title">About</h2>
-                    <p>I am Gabriel Silva, producer & editor with over 8 years transforming ideas into impactful visual narratives. I work with storytelling, performance, and branding through video — from concept to delivery.</p>
+                    <p>I am Matheus Sá, producer & editor with over 8 years transforming ideas into impactful visual narratives. I work with storytelling, performance, and branding through video — from concept to delivery.</p>
                     <div class="skills">
                         <div class="skill-item">
                             <span class="skill-name">Direction</span>
@@ -188,7 +188,7 @@
                 </div>
                 <div class="about-image">
                     <div class="image-frame">
-                        <span class="profile-placeholder">GS</span>
+                        <span class="profile-placeholder">MS</span>
                     </div>
                 </div>
             </div>
@@ -199,11 +199,18 @@
         <div class="container">
             <h2 class="section-title">Testimonials</h2>
             <div class="testimonials-slider">
-                <div class="testimonial">
-                    <blockquote>"Gabriel turned our vision into reality. The result exceeded all expectations."</blockquote>
+                <div class="testimonial active">
+                    <blockquote>"Matheus turned our vision into reality. The result exceeded all expectations."</blockquote>
                     <cite>
-                        <strong>Maria Santos</strong>
-                        <span>Marketing Director, TechCorp</span>
+                        <strong>Rodrigo Silva</strong>
+                        <span>CEO, Fox Sales</span>
+                    </cite>
+                </div>
+                <div class="testimonial">
+                    <blockquote>"Exceptional editing skills and creative direction. Highly recommend!"</blockquote>
+                    <cite>
+                        <strong>Pedro Miguel</strong>
+                        <span>Copywriter</span>
                     </cite>
                 </div>
             </div>
@@ -219,7 +226,7 @@
                     <div class="contact-details">
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>contact@gabrielsilva.com</span>
+                            <span>contact@matheussa.com</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
@@ -254,12 +261,14 @@
         </div>
     </section>
 
-    <!-- Video Player Overlay -->
+    <!-- Video Player Overlay (Added next/prev buttons for fullscreen navigation) -->
     <div id="videoPlayerOverlay" class="video-player-overlay">
         <div class="player-container">
             <button id="closePlayer" class="close-player"><i class="fas fa-times"></i></button>
             <div class="video-wrapper">
                 <iframe id="videoFrame" src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                <button id="prevVideo" class="video-nav prev" style="display: none;"><i class="fas fa-arrow-left"></i></button>
+                <button id="nextVideo" class="video-nav next" style="display: none;"><i class="fas fa-arrow-right"></i></button>
             </div>
             <div class="video-info">
                 <h3 id="videoTitle"></h3>
