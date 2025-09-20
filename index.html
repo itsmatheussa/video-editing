@@ -1,1 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Portfolio - Streaming Experience</title>
+    <!-- SEO and Meta Tags -->
+    <meta name="description" content="Portfolio of Gabriel Silva, director and editor specializing in audiovisual production.">
+    <meta property="og:title" content="Gabriel Silva Portfolio">
+    <meta property="og:description" content="Transforming ideas into impactful visual narratives.">
+    <meta property="og:image" content="path/to/og-image.jpg">
+    <meta property="og:url" content="your-site-url.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/device.css">
+    <link rel="stylesheet" href="css/player.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Preparing your experience...</p>
+        </div>
+    </div>
 
+    <section id="hero" class="hero">
+        <div class="hero-background">
+            <div class="gradient-overlay"></div>
+            <div class="particles"></div>
+        </div>
+        <div class="hero-content container">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    Videos that Capture Attention
+                    and Generate Impact.
+                </h1>
+                <p class="hero-subtitle">
+                    I am Gabriel Silva — director and editor.
+                    Transforming briefs into visual narratives that convert.
+                </p>
+                <div class="hero-cta">
+                    <a href="#cases" class="btn-primary">View Portfolio</a>
+                    <a href="#contact" class="btn-secondary">Schedule Call</a>
+                </div>
+            </div>
+
+            <div id="deviceContainer" class="device-container">
+                <div id="desktopDevice" class="device desktop-device">
+                    <div class="laptop-base">
+                        <div class="laptop-screen-frame">
+                            <div class="laptop-screen">
+                                <div id="screenContent" class="screen-content">
+                                    <div class="platform-header">
+                                        <h2>CreativeStream</h2>
+                                        <nav class="platform-nav">
+                                            <button class="nav-btn active" data-filter="all">All</button>
+                                            <button class="nav-btn" data-filter="case-studies">Cases</button>
+                                            <button class="nav-btn" data-filter="ads">Ads</button>
+                                            <button class="nav-btn" data-filter="shorts">Shorts</button>
+                                        </nav>
+                                    </div>
+                                    <div class="video-grid"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="laptop-keyboard"></div>
+                    </div>
+                </div>
+
+                <div id="mobileDevice" class="device mobile-device">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div id="screenContentMobile" class="screen-content">
+                                <div class="platform-header">
+                                    <h2>CreativeStream</h2>
+                                    <nav class="platform-nav">
+                                        <button class="nav-btn active" data-filter="all">All</button>
+                                        <button class="nav-btn" data-filter="case-studies">Cases</button>
+                                        <button class="nav-btn" data-filter="ads">Ads</button>
+                                        <button class="nav-btn" data-filter="shorts">Shorts</button>
+                                    </nav>
+                                </div>
+                                <div class="mobile-feed"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="deviceHint" class="device-hint">
+                    <div class="hint-content">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <p>Click to open</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cases" class="cases-section">
+        <div class="container">
+            <h2 class="section-title">Featured Cases</h2>
+            <div class="case-card">
+                <div class="case-image">
+                    <div class="image-frame">
+                        <span class="profile-placeholder">📽️</span>
+                    </div>
+                </div>
+                <div class="case-content">
+                    <h3>Premium Digital Campaign</h3>
+                    <div class="case-metrics">
+                        <div class="metric">
+                            <span class="metric-value">2.5M</span>
+                            <span class="metric-label">Views</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">85%</span>
+                            <span class="metric-label">Engagement</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">300%</span>
+                            <span class="metric-label">ROI</span>
+                        </div>
+                    </div>
+                    <p>We transformed a complex idea into a visual narrative that generated measurable impact for the brand.</p>
+                    <a href="#hero" class="btn-case" onclick="openDevice()">View Full Case</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2 class="section-title">Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-video"></i></div>
+                    <h3>Audiovisual Production</h3>
+                    <p>From concept to final delivery. Institutional videos, campaigns, and premium content.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-edit"></i></div>
+                    <h3>Editing & Motion</h3>
+                    <p>Cinematic post-production with motion graphics and professional visual effects.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Creative Direction</h3>
+                    <p>Development of visual and narrative concept aligned with brand objectives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">About</h2>
+                    <p>I am Gabriel Silva, producer & editor with over 8 years transforming ideas into impactful visual narratives. I work with storytelling, performance, and branding through video — from concept to delivery.</p>
+                    <div class="skills">
+                        <div class="skill-item">
+                            <span class="skill-name">Direction</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Editing</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Motion Design</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-frame">
+                        <span class="profile-placeholder">GS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">Testimonials</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial">
+                    <blockquote>"Gabriel turned our vision into reality. The result exceeded all expectations."</blockquote>
+                    <cite>
+                        <strong>Maria Santos</strong>
+                        <span>Marketing Director, TechCorp</span>
+                    </cite>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>Let's Create Something Amazing Together?</h2>
+                    <p>Ready to transform your idea into a visual narrative that converts?</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@gabrielsilva.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+55 (11) 99999-9999</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>São Paulo, Brazil</span>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Enter a valid email address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" placeholder="Your company name (optional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="project">Project</label>
+                        <textarea id="project" placeholder="Describe your project details" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Player Overlay -->
+    <div id="videoPlayerOverlay" class="video-player-overlay">
+        <div class="player-container">
+            <button id="closePlayer" class="close-player"><i class="fas fa-times"></i></button>
+            <div class="video-wrapper">
+                <iframe id="videoFrame" src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            </div>
+            <div class="video-info">
+                <h3 id="videoTitle"></h3>
+                <p id="videoDescription"></p>
+                <div class="video-actions">
+                    <button id="videoCTA" class="btn-cta">View More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/device.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
