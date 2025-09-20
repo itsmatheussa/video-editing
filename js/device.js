@@ -22,7 +22,7 @@ class DeviceController {
         this.mobileDevice = document.getElementById('mobileDevice');
         this.laptopScreen = document.getElementById('laptopScreen');
         this.phoneScreen = document.getElementById('phoneScreen');
-        this.screenContent = document.getElementById('screenContent');
+        this.screenContent = document.getElementById(this.isMobile ? 'screenContentMobile' : 'screenContent');
         this.deviceHint = document.getElementById('deviceHint');
         
         // Initial state setup
@@ -195,7 +195,7 @@ class DeviceController {
     }
     
     bootScreen() {
-        const screenContent = this.screenContent;
+        const screenContent = document.getElementById(this.isMobile ? 'screenContentMobile' : 'screenContent');
         if (!screenContent) return;
         
         // Screen boot animation
